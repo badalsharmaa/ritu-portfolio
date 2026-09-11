@@ -95,10 +95,10 @@ ScrollReveal({
   delay: 100
 });
 
-ScrollReveal().reveal('.home-content, .heading, .skills, .portfolio-container #pbtop', { origin: 'top' });
-ScrollReveal().reveal('.home-img, .box-container #box2, .portfolio-container #pbbuttom, .contact form, .cert-card, .skills-wrapper', { origin: 'bottom' });
-ScrollReveal().reveal('.home h1, .box-container #box1, .portfolio-container #pbleft, .about-img, .about-content h3, .education .box-container .box, .contact-card:nth-child(odd)', { origin: 'left' });
-ScrollReveal().reveal('.home p, .box-container #box3, .portfolio-container #pbright, .about-content p, .experience-box, .contact-card:nth-child(even)', { origin: 'right' });
+ScrollReveal().reveal('.home-content, .heading, .skills', { origin: 'top' });
+ScrollReveal().reveal('.home-img, .box-container #box2, .contact form, .cert-card, .skills-wrapper', { origin: 'bottom' });
+ScrollReveal().reveal('.home h1, .box-container #box1, .about-img, .about-content h3, .education .box-container .box, .contact-card:nth-child(odd)', { origin: 'left' });
+ScrollReveal().reveal('.home p, .box-container #box3, .about-content p, .experience-box, .contact-card:nth-child(even)', { origin: 'right' });
 
 /*===============================================typed js=================================================*/
 
