@@ -11,34 +11,52 @@ window.addEventListener("load",function(){
   
 })
 
-/*============================================toggle icon navbar===============================*/
+/*============================================automatic / toggle theme===============================*/
 const themeButton = document.getElementById('theme')
 const lightTheme = 'lightTheme'
-const iconTheme = 'bx bx-moon'
-// Previously selected topic (if user selected)
-const selectedTheme = localStorage.getItem('selected-theme')
-const selectedIcon = localStorage.getItem('selected-icon')
+const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)')
 
-// We obtain the current theme that the interface has by validating the dark-theme class
-const getCurrentTheme = () => document.body.classList.contains(lightTheme) ? 'dark' : 'light'
-const getCurrentIcon = () => themeButton.classList.contains(iconTheme) ? 'bx bx-sun' : 'bx bx-moon'
-
-// We validate if the user previously chose a topic
-if (selectedTheme) {
-  // If the validation is fulfilled, we ask what the issue was to know if we activated or deactivated the dark
-  document.body.classList[selectedTheme === 'dark' ? 'add' : 'remove'](lightTheme)
-  themeButton.classList[selectedIcon === 'bx bx-moon' ? 'add' : 'remove'](iconTheme)
+// Function to apply theme and update icon
+const applyTheme = (isLight) => {
+  if (isLight) {
+    document.body.classList.add(lightTheme)
+    if (themeButton) {
+      themeButton.classList.remove('bx-sun')
+      themeButton.classList.add('bx-moon')
+    }
+  } else {
+    document.body.classList.remove(lightTheme)
+    if (themeButton) {
+      themeButton.classList.remove('bx-moon')
+      themeButton.classList.add('bx-sun')
+    }
+  }
 }
 
-// Activate / deactivate the theme manually with the button
-themeButton.addEventListener('click', () => {
-    // Add or remove the dark / icon theme
-    document.body.classList.toggle(lightTheme)
-    themeButton.classList.toggle(iconTheme)
-    // We save the theme and the current icon that the user chose
-    localStorage.setItem('selected-theme', getCurrentTheme())
-    localStorage.setItem('selected-icon', getCurrentIcon())
+// Initial theme setup: check stored preference or detect browser/system preference
+const selectedTheme = localStorage.getItem('selected-theme')
+if (selectedTheme) {
+  applyTheme(selectedTheme === 'light')
+} else {
+  // If user has not manually chosen, match browser/system setting
+  applyTheme(!prefersDarkScheme.matches)
+}
+
+// Listen for browser/system color scheme changes automatically
+prefersDarkScheme.addEventListener('change', (e) => {
+  if (!localStorage.getItem('selected-theme')) {
+    applyTheme(!e.matches)
+  }
 })
+
+// Allow user to manually toggle theme with button
+if (themeButton) {
+  themeButton.addEventListener('click', () => {
+    const isNowLight = !document.body.classList.contains(lightTheme)
+    applyTheme(isNowLight)
+    localStorage.setItem('selected-theme', isNowLight ? 'light' : 'dark')
+  })
+}
 
 /*============================================toggle icon navbar===============================*/
 
