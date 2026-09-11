@@ -68,32 +68,35 @@ menuIcon.onclick = () => {
   navbar.classList.toggle('active');
 };
 
-/*=============================================nav active link================================*/
+/*=============================================nav active link & sticky header================================*/
 
-let sections = document.querySelectorAll('section');
-let navlinks = document.querySelectorAll('header nav a');
+const sections = document.querySelectorAll('section');
+const navlinks = document.querySelectorAll('header nav a');
+const header = document.querySelector('header');
 
-window.onscroll = () => {
+window.addEventListener('scroll', () => {
+  const top = window.scrollY;
+
+  // Sticky header
+  if (header) {
+    header.classList.toggle('sticky', top > 80);
+  }
+
+  // Active nav link highlight
   sections.forEach(sec => {
-    let top = window.scrollY;
-    let offset = sec.offsetTop - 150;
-    let height = sec.offsetHeight;
-    let id = sec.getAttribute('id');
+    const offset = sec.offsetTop - 180;
+    const height = sec.offsetHeight;
+    const id = sec.getAttribute('id');
 
-    if(top >= offset && top < offset + height) {
-      navlinks.forEach(links => {
-        links.classList.remove('active');
-        document.querySelector('header nav a[href*=' + id + ']').classList.add('active');
-      });   
-    };
+    if (top >= offset && top < offset + height) {
+      navlinks.forEach(link => {
+        link.classList.remove('active');
+        const activeLink = document.querySelector('header nav a[href*=' + id + ']');
+        if (activeLink) activeLink.classList.add('active');
+      });
+    }
   });
-};
-
-/*=================================sticky nav bar==========================================================*/
-
-let header = document.querySelector('header');
-
-header.classList.toggle('sticky',window.scrollY > 100);
+});
 
 /*=========================remove toggle icon and navbar when click navbar link=============================*/
 
@@ -104,19 +107,46 @@ document.querySelectorAll('.nav a').forEach(link => {
   });
 });
 
-/*==================================scroll effect============================================================*/
+/*==================================refined scroll reveal effect============================================================*/
 
-ScrollReveal({ 
-  reset: true, 
-  distance:'50px',
-  duration: 1200,
-  delay: 100
+const sr = ScrollReveal({ 
+  reset: false, 
+  distance: '30px',
+  duration: 800,
+  delay: 80,
+  viewFactor: 0.15,
+  easing: 'ease-out'
 });
 
-ScrollReveal().reveal('.home-content, .heading, .skills', { origin: 'top' });
-ScrollReveal().reveal('.home-img, .box-container #box2, .contact form, .cert-card, .skills-wrapper', { origin: 'bottom' });
-ScrollReveal().reveal('.home h1, .box-container #box1, .about-img, .about-content h3, .education .box-container .box, .contact-card:nth-child(odd)', { origin: 'left' });
-ScrollReveal().reveal('.home p, .box-container #box3, .about-content p, .experience-box, .contact-card:nth-child(even)', { origin: 'right' });
+// Headings
+sr.reveal('.heading, .cert-section-title', { origin: 'top' });
+
+// Hero section
+sr.reveal('.home-content', { origin: 'left' });
+sr.reveal('.home-img', { origin: 'right', delay: 150 });
+
+// About section
+sr.reveal('.about-img', { origin: 'left' });
+sr.reveal('.about-content', { origin: 'right', delay: 100 });
+
+// Services cards (staggered)
+sr.reveal('.services .box-container .box', { origin: 'bottom', interval: 120 });
+
+// Experience boxes
+sr.reveal('.experience-box', { origin: 'bottom', interval: 150 });
+
+// Skill category cards
+sr.reveal('.skill-category', { origin: 'bottom', interval: 120 });
+
+// Education cards
+sr.reveal('.education .box-container .box', { origin: 'bottom', interval: 120 });
+
+// Certifications
+sr.reveal('.cert-card', { origin: 'bottom', interval: 100 });
+
+// Contact cards & form
+sr.reveal('.contact-card', { origin: 'left', interval: 100 });
+sr.reveal('.contact form', { origin: 'right', delay: 120 });
 
 /*===============================================typed js=================================================*/
 
