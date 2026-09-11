@@ -19,6 +19,8 @@ Modern, responsive portfolio website showcasing the professional experience, ski
   - *Technical & Cloud*: AWS Cloud, Java, Python, HTML5, CSS3, PHP, Git/GitHub.
 - **Education & Certifications**:
   - B.Tech in Computer Science & Engineering (GLA University, 75%)
+  - Class XII - Science Stream (Delhi Public School, Aligarh | CBSE)
+  - Class X (Delhi Public School, Aligarh | CBSE)
   - DevOps & AWS Cloud Practitioner – Jovac
   - Excel Essentials – Udemy
   - Essentials of Java – GLA University
