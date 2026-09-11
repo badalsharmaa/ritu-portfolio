@@ -1,6 +1,10 @@
 # Ritu Kushwaha - Professional Portfolio
 
-Modern, responsive portfolio website showcasing the professional experience, skills, projects, and achievements of **Ritu Kushwaha** — Product Management Specialist with 2+ years of experience at Amazon in ML Data Operations and Business Analytics.
+[![Live Site](https://img.shields.io/badge/Live_Site-Vercel-black?style=for-the-badge&logo=vercel)](https://ritu-portfolio-navy.vercel.app)
+
+**Live URL**: [https://ritu-portfolio-navy.vercel.app](https://ritu-portfolio-navy.vercel.app)
+
+Modern, responsive portfolio website showcasing the professional experience, skills, and achievements of **Ritu Kushwaha** — Product Management Specialist with 2+ years of experience at Amazon in ML Data Operations and Business Analytics.
 
 ---
 
