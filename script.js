@@ -133,28 +133,64 @@ const typed = new Typed('.multiple-text', {
   loop:true
 }); 
 
-/*===============================================form =================================================*/
+/*===============================================Contact Form Submission=================================================*/
 
 const form = document.querySelector("#form")
 const submitButton = document.querySelector("#submitbtn")
-const scriptURL = 'https://script.google.com/macros/s/AKfycbyryPCvtt1WpGIsC8E7ZboLfyHo317H-4eBS3lHFbZNaALgm9XFrrIU2uNEW2kTYd8Jiw/exec'
 
 if (form) {
-  form.addEventListener('submit', e => {
-    submitButton.disabled = true
+  form.addEventListener('submit', async (e) => {
     e.preventDefault()
-    let requestBody = new FormData(form)
-    fetch(scriptURL, { method: 'POST', body: requestBody})
-      .then(response => {
-         alert('Thank you! Your message has been sent successfully.')
-         form.reset()
-         submitButton.disabled = false
+
+    const originalBtnText = submitButton ? submitButton.value : 'Send Message'
+    if (submitButton) {
+      submitButton.disabled = true
+      submitButton.value = "Sending..."
+    }
+
+    const formData = new FormData(form)
+    const name = formData.get('Name') || ''
+    const email = formData.get('Email') || ''
+    const phone = formData.get('Mobile Number') || 'Not provided'
+    const subject = formData.get('Email Subject') || 'Portfolio Inquiry'
+    const message = formData.get('Message') || ''
+
+    try {
+      const response = await fetch('https://formsubmit.co/ajax/ritukushwaha3358@gmail.com', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify({
+          Name: name,
+          Email: email,
+          Phone: phone,
+          Subject: subject,
+          Message: message,
+          _subject: `New Portfolio Message from ${name}: ${subject}`
         })
-      .catch(error => {
-        alert('Thank you! Your message has been recorded.')
-        form.reset()
-        submitButton.disabled = false
       })
+
+      if (response.ok) {
+        alert(`Thank you, ${name}! Your message has been sent successfully to Ritu Kushwaha.`)
+        form.reset()
+      } else {
+        throw new Error('Server response error')
+      }
+    } catch (error) {
+      // Graceful fallback to mailto if external fetch is blocked
+      const mailtoUrl = `mailto:ritukushwaha3358@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(
+        `Hi Ritu,\n\nName: ${name}\nEmail: ${email}\nPhone: ${phone}\n\nMessage:\n${message}`
+      )}`
+      window.location.href = mailtoUrl
+      alert('Opening your email client to send the message directly to ritukushwaha3358@gmail.com')
+    } finally {
+      if (submitButton) {
+        submitButton.disabled = false
+        submitButton.value = originalBtnText
+      }
+    }
   })
 }
 

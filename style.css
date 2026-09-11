@@ -170,14 +170,6 @@ html {
     min-height: 100vh;
     padding: 10rem 9% 2rem;
   }
-  #theme {
-    font-size: 2rem;
-    cursor: pointer;
-    transition: 0.5s ease;
-  }
-  #theme:hover {
-    transform: rotate(15deg);
-  }
 
 /*===============================================================================HOME-SCREEN=====================================================================*/  
 
