@@ -191,6 +191,9 @@ html {
   }
   .home-img img {
     width: 35vw;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    object-position: center top;
     box-shadow: 0 0 3rem var(--main-color);
     border-radius: 50%;
     background-color: var(--main-color);
@@ -284,6 +287,9 @@ html {
   .about-img img {
     border-width: 50px;
     width: 35vw;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    object-position: center top;
     box-shadow: 0 0 3rem var(--main-color);
     border-radius: 50%;
     background-color: var(--second-bg-color);
